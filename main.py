@@ -24,12 +24,11 @@ async def check_new_gifts():
     if new_ids:
         print("🎁 Новые подарки обнаружены:")
         known_ids = current_ids
-
-    else:
-        print("✅ Новых подарков нет.")
         for _ in range(30):
             requests.post(f"https://ntfy.sh/{topic}", data=message.encode("utf-8"))
-            time.sleep(0.03)
+            time.sleep(0.05)
+    else:
+        print("✅ Новых подарков нет.")
 
 
 async def main():
