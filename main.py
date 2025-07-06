@@ -13,7 +13,7 @@ bot_token = os.getenv("BOT_TOKEN")
 topic = os.getenv("NTFY_TOPIC")
 
 # Правильно создаём TelegramClient
-client = TelegramClient(f'bot_session{int(time.time()*1000000)}', api_id, api_hash)
+client = TelegramClient(f'/data/bot_session{int(time.time()*1000000)}', api_id, api_hash)
 
 known_ids = set()
 
