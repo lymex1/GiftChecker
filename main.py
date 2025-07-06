@@ -1,13 +1,18 @@
+import os
+import time
 import asyncio
 import requests
-import time
+
 from telethon.tl.types import StarGift
 from telethon import TelegramClient, functions
 
-api_id = 23919006 
-api_hash = '6b4e3658f9b2866f0c3f711decc326c3'
+api_id = int(os.getenv("API_ID"))
+api_hash = os.getenv("API_HASH")
+session = os.getenv("SESSION", "session_name")
 
-client = TelegramClient('session_name', api_id, api_hash)
+client = TelegramClient(session, api_id, api_hash)
+
+topic = os.getenv("NTFY_TOPIC")
 
 known_ids = set()
 
@@ -18,7 +23,6 @@ async def check_new_gifts():
 
     new_ids = current_ids - known_ids
     
-    topic = "star-gifts-2025"
     message = "🎁 Вышел новый Telegram подарок!"
     
     if new_ids:
