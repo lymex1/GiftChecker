@@ -44,6 +44,6 @@ async def main():
 
     while True:
         await check_new_gifts()
-        await asyncio.sleep(10)
+        await asyncio.sleep(5)
 
 asyncio.run(main())
