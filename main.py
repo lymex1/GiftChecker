@@ -10,11 +10,12 @@ api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
 session = os.getenv("SESSION", "session_name")
 bot_token = os.getenv("BOT_TOKEN")
+topic = os.getenv("NTFY_TOPIC")
 
-client = TelegramClient(f'bot_session{int(time.time()*1000000)}', api_id, api_hash).start(bot_token=bot_token)
+# Правильно создаём TelegramClient
+client = TelegramClient(f'bot_session{int(time.time()*1000000)}', api_id, api_hash)
 
 known_ids = set()
-topic = os.getenv("NTFY_TOPIC")
 
 async def check_new_gifts():
     global known_ids
@@ -37,6 +38,7 @@ async def check_new_gifts():
 
 async def main():
     try:
+        await client.start(bot_token=bot_token)
         result = await client(functions.payments.GetStarGiftsRequest(hash=0))
         global known_ids
         known_ids = {gift.id for gift in result.gifts}
@@ -50,5 +52,5 @@ async def main():
         await check_new_gifts()
         await asyncio.sleep(5)
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+if __name__ == "__main__":
+    asyncio.run(main())
