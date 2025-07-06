@@ -12,7 +12,7 @@ session = os.getenv("SESSION", "session_name")
 bot_token = os.getenv("BOT_TOKEN")
 topic = os.getenv("NTFY_TOPIC")
 
-client = TelegramClient(f'/data/bot_session}', api_id, api_hash)
+client = TelegramClient("/data/bot_session", api_id, api_hash)
 
 known_ids = set()
 
